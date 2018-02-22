@@ -10,11 +10,12 @@ import { Brew } from './brew.model';
         <option value="empty" selected="selected">Empty Kegs</option>
       </select>
       <ul>
-        <li *ngFor="let currentBrew of childBrewList | empty:filterByEmptiness">{{currentBrew.name}} {{currentBrew.brand}} &#36;{{currentBrew.price}}, {{currentBrew.alcoholContent}}&#37;<br>
+        <li *ngFor="let currentBrew of childBrewList | empty:filterByEmptiness">{{currentBrew.name}} {{currentBrew.brand}} &#36;{{currentBrew.price}}, {{currentBrew.alcoholContent}}&#37; {{currentBrew.pints}} <br>
           <label>Empty/Full</label>
           <input *ngIf="currentBrew.done === true" type="checkbox" checked (click)="toggleDone(currentBrew, false)"/>
           <input *ngIf="currentBrew.done === false" type="checkbox" (click)="toggleDone(currentBrew, true)"/><br>
           <button (click)="editButtonHasBeenClicked(currentBrew)">Edit!</button>
+          <button (click)="sellPint(currentBrew)">Sold!</button>
         </li>
       </ul>
   `
@@ -24,6 +25,7 @@ export class BrewListComponent {
 
   @Input() childBrewList: Brew[];
   @Output() clickSender = new EventEmitter();
+  @Output() pintSender = new EventEmitter();
 
   filterByEmptiness: string = "empty";
 
@@ -46,6 +48,12 @@ export class BrewListComponent {
 
 toggleDone(clickedBrew: Brew, setEmpty: boolean) {
    clickedBrew.done = setEmpty;
+ }
+
+ sellPint(soldBrew: Brew) {
+   soldBrew.pints -=1;
+   this.pintSender.emit(soldBrew);
+   console.log(soldBrew.pints);
  }
 
 }

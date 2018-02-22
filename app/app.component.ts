@@ -6,7 +6,7 @@ import { Brew } from './brew.model';
   template: `
     <div class="container">
       <h1>Tap List For {{month}}/{{day}}/{{year}}</h1>
-      <brew-list [childBrewList]="masterBrewList" (clickSender)="editBrew($event)"></brew-list>
+      <brew-list [childBrewList]="masterBrewList" (clickSender)="editBrew($event)" (pintSender)="sellBrew($event)"></brew-list>
       <hr>
       <edit-brew [childSelectedBrew]="selectedBrew" (doneButtonClickedSender)="finishedEditing()"></edit-brew>
       <new-brew (newBrewSender)="addBrew($event)"></new-brew>
@@ -29,6 +29,10 @@ export class AppComponent {
 
   editBrew(clickedBrew) {
     this.selectedBrew = clickedBrew;
+  }
+
+  sellBrew(soldBrew) {
+    this.selectedBrew = soldBrew;
   }
 
   finishedEditing() {
