@@ -7,7 +7,12 @@ import { Brew } from './Brew.model';
     <div>
       <div *ngIf="childSelectedBrew">
         <h3>{{childSelectedBrew.name}}</h3>
-        <p>Is Keg Empty? {{childSelectedBrew.done}}</p>
+        <div *ngIf="childSelectedBrew.done === true">
+          <p>Is Keg Empty? Yes</p>
+        </div>
+        <div *ngIf="childSelectedBrew.done === false">
+          <p>Is Keg Empty? No</p>
+        </div>
         <hr>
         <h3>Edit Beer</h3>
         <label>Enter Beer Name:</label>

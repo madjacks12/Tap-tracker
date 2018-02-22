@@ -7,9 +7,11 @@ import { EditBrewComponent }  from './edit-brew.component';
 import { NewBrewComponent } from './new-brew.component';
 import { EmptyPipe } from './empty.pipe';
 
+
 @NgModule({
   imports: [ BrowserModule,
-            FormsModule ],
+            FormsModule,
+                          ],
   declarations: [ AppComponent,
                   BrewListComponent,
                   EditBrewComponent,
