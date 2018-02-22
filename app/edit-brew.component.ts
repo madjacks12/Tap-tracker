@@ -9,9 +9,16 @@ import { Brew } from './Brew.model';
         <h3>{{childSelectedBrew.name}}</h3>
         <p>Is Keg Empty? {{childSelectedBrew.done}}</p>
         <hr>
-        <h3>Edit Task</h3>
-        <label>Enter Brew Name:</label>
+        <h3>Edit Beer</h3>
+        <label>Enter Beer Name:</label>
         <input [(ngModel)]="childSelectedBrew.name">
+        <label>Enter Beer Brand:</label>
+        <input [(ngModel)]="childSelectedBrew.brand">
+        <label>Enter Beer Price:</label>
+        <input [(ngModel)]="childSelectedBrew.price">
+        <label>Enter Beer Alcohol Percentage:</label>
+        <input [(ngModel)]="childSelectedBrew.alcoholContent">
+
         <button (click)="doneButtonClicked()">Done</button>
       </div>
     </div>

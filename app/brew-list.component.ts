@@ -5,14 +5,15 @@ import { Brew } from './brew.model';
   selector: 'brew-list',
   template: `
   <select (change)="onChange($event.target.value)">
-        <option value="allBrews">All Tasks</option>
+        <option value="allBrews">All Kegs</option>
         <option value="notEmpty">Full Kegs</option>
-        <option value="empty" selected="selected">Empty Tasks</option>
+        <option value="empty" selected="selected">Empty Kegs</option>
       </select>
       <ul>
-        <li (click)="isDone(currentBrew)" *ngFor="let currentBrew of childBrewList | empty:filterByEmptiness">{{currentBrew.name}} {{currentBrew.brand}} {{currentBrew.price}} {{currentBrew.alcoholContent}}
+        <li *ngFor="let currentBrew of childBrewList | empty:filterByEmptiness">{{currentBrew.name}} {{currentBrew.brand}} &#36;{{currentBrew.price}}, {{currentBrew.alcoholContent}}&#37;<br>
+          <label>Empty/Full</label>
           <input *ngIf="currentBrew.done === true" type="checkbox" checked (click)="toggleDone(currentBrew, false)"/>
-          <input *ngIf="currentBrew.done === false" type="checkbox" (click)="toggleDone(currentBrew, true)"/>
+          <input *ngIf="currentBrew.done === false" type="checkbox" (click)="toggleDone(currentBrew, true)"/><br>
           <button (click)="editButtonHasBeenClicked(currentBrew)">Edit!</button>
         </li>
       </ul>
@@ -29,15 +30,6 @@ export class BrewListComponent {
   editButtonHasBeenClicked(brewToEdit: Brew) {
     this.clickSender.emit(brewToEdit);
   }
-
-  isDone(clickedBrew: Brew) {
-    if(clickedBrew.done === true) {
-      alert("This keg is empty!");
-    } else {
-      alert("This keg is not empty yet!");
-    }
-  }
-
   onChange(optionFromMenu) {
     this.filterByEmptiness = optionFromMenu;
   }
