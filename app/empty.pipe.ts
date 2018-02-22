@@ -1,23 +1,23 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Task} from './task.model';
+import {Brew} from './brew.model';
 
 @Pipe({
-  name: "completeness",
+  name: "empty",
    pure: false
 })
 
 
-export class CompletenessPipe implements PipeTransform {
-  transform(input: Task[], desiredCompleteness) {
-    var output: Task[] = [];
-    if(desiredCompleteness === "incompleteTasks") {
+export class EmptyPipe implements PipeTransform {
+  transform(input: Brew[], desiredLevel) {
+    var output: Brew[] = [];
+    if(desiredLevel === "notEmpty") {
       for (var i = 0; i < input.length; i++) {
         if (input[i].done === false) {
           output.push(input[i]);
         }
       }
       return output;
-    } else if (desiredCompleteness === "completedTasks") {
+    } else if (desiredLevel === "empty") {
       for (var i = 0; i < input.length; i++) {
         if (input[i].done === true) {
           output.push(input[i]);

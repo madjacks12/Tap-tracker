@@ -7,8 +7,8 @@ var lib = require('bower-files')({
     "bootstrap" : {
       "main": [
         "less/bootstrap.less",
-        "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js"
+        "dist/js/bootstrap.js",
+        "dist/css/bootstrap.css"
       ]
     }
   }

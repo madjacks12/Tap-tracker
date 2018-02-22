@@ -1,44 +1,42 @@
 import { Component } from '@angular/core';
-import { Task } from './task.model';
+import { Brew } from './brew.model';
 
 @Component({
   selector: 'app-root',
   template: `
     <div class="container">
-      <h1>To Do List for {{month}}/{{day}}/{{year}}</h1>
-      <h3>{{currentFocus}}</h3>
-      <task-list [childTaskList]="masterTaskList" (clickSender)="editTask($event)"></task-list>
+      <h1>Tap List For {{month}}/{{day}}/{{year}}</h1>
+      <brew-list [childBrewList]="masterBrewList" (clickSender)="editBrew($event)"></brew-list>
       <hr>
-      <edit-task [childSelectedTask]="selectedTask" (doneButtonClickedSender)="finishedEditing()"></edit-task>
-      <new-task (newTaskSender)="addTask($event)"></new-task>
+      <edit-brew [childSelectedBrew]="selectedBrew" (doneButtonClickedSender)="finishedEditing()"></edit-brew>
+      <new-brew (newBrewSender)="addBrew($event)"></new-brew>
     </div>
   `
 })
 
 export class AppComponent {
-  currentFocus: string = 'Angular Homework';
   currentTime = new Date();
   month: number = this.currentTime.getMonth() + 1;
   day: number = this.currentTime.getDate();
   year: number = this.currentTime.getFullYear();
-  selectedTask = null;
+  selectedBrew = null;
 
-  masterTaskList: Task[] = [
-    new Task('Finish weekend Angular homework for Epicodus course', 3),
-    new Task('Begin brainstorming possible JavaScript group projects', 2),
-    new Task('Add README file to last few Angular repos on GitHub', 2)
+  masterBrewList: Brew [] = [
+    new Brew('Cool Beer', '10 Barrell', 6, 8),
+    new Brew('Good Beer', 'Burnside', 5, 6),
+    new Brew('Bad Beer', 'Pyramid', 3, 8)
   ];
 
-  editTask(clickedTask) {
-    this.selectedTask = clickedTask;
+  editBrew(clickedBrew) {
+    this.selectedBrew = clickedBrew;
   }
 
   finishedEditing() {
-    this.selectedTask = null;
+    this.selectedBrew = null;
   }
 
-  addTask(newTaskFromChild: Task) {
-  this.masterTaskList.push(newTaskFromChild);
+  addBrew(newBrewFromChild: Brew) {
+  this.masterBrewList.push(newBrewFromChild);
 }
 
 }
