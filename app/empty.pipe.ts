@@ -10,9 +10,16 @@ import {Brew} from './brew.model';
 export class EmptyPipe implements PipeTransform {
   transform(input: Brew[], desiredLevel) {
     var output: Brew[] = [];
-    if(desiredLevel === "notEmpty") {
+    if(desiredLevel === "good") {
       for (var i = 0; i < input.length; i++) {
-        if (input[i].done === false) {
+        if (input[i].done === false && input[i].pints >= 10) {
+          output.push(input[i]);
+        }
+      }
+      return output;
+    } else if (desiredLevel === "under10") {
+      for (var i = 0; i < input.length; i++) {
+        if (input[i].pints < 10) {
           output.push(input[i]);
         }
       }
@@ -24,7 +31,9 @@ export class EmptyPipe implements PipeTransform {
         }
       }
       return output;
-    } else {
+    }
+
+    else {
       return input;
     }
   }
